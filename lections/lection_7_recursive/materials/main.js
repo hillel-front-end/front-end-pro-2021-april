@@ -41,6 +41,48 @@ var result = sum(3); // 3 + 2 + 1 === 6;
 
 console.log(result, 'result');
 
+// ----------------------
 
 
 
+
+// Array.isArray();
+
+// console.log(mass, 'mass');
+
+// for(var i = 0; i < mass.length; i++) {
+//     // console.log(mass[i], i);
+//     for(var j = 0; j < mass[i].length; j++) {
+//         // console.log(mass[i][j]);
+//         if (Array.isArray(mass[i][j])) {
+//             for(var k = 0; k < mass[i][j].length; k++) {
+//                 console.log(mass[i][j][k]);
+
+//             }
+//         } else {
+//             mass[i][j] = Math.round(Math.random() * 30);
+//         }
+//     }
+// }
+
+// -----------------
+
+var mass = new Array(new Array(4), new Array(3), new Array(4));
+
+console.log('original array --->', mass)
+
+function arrayFiller(arr) {
+    for(var i = 0; i < arr.length; i++) {
+
+        if (Array.isArray(arr[i])) {
+            arrayFiller(arr[i]);
+        } else {
+            arr[i] = Math.round(Math.random() * 30);
+        }
+    } 
+
+}
+
+arrayFiller(mass);
+
+console.log(mass, 'mass');
