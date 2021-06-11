@@ -38,8 +38,8 @@ var person2 = {
 
 function getName(greeting, a, b, c, d) {
 
-    console.log(this, arguments);
-    console.log(greeting, 'greeting');
+        // console.log(this, arguments);
+        // console.log(greeting, 'greeting');
     // return console.log(greeting + '' + this.name);
 }
 
@@ -81,3 +81,113 @@ getName.apply(person, mass);
  arr.myPush = function() {
      
  }
+
+  // ------------------- bind -------------------
+
+
+  
+var person = {
+    name: "Valera"
+};
+
+function getName(a, b) {
+    console.log(this);
+
+    console.log(a, b, 'a, b');
+
+}
+
+//   getName.call(person, 'hello', 1, 2 ,3)
+
+// getName();
+
+// function myBind(context) {
+//     return function() {
+        
+//     }
+// }
+
+var getNameWithPerson = getName.bind(person);
+
+console.log(getNameWithPerson, 'getNameWithPerson');
+
+console.log(getName, 'getName');
+
+// console.log(getNameWithPerson === getName);
+
+getNameWithPerson(1, 2);
+getNameWithPerson(3, 4);
+getNameWithPerson(5, 6);
+
+
+// -------- use cases - 1 ------
+
+var human = {
+    name: 'Valera',
+    run: function() {
+        console.log(this.name,' ...run');
+    }
+}
+
+
+// human.run();
+
+function toDo(callback) { // callback = human.run
+    if (!callback) return;
+
+    callback();
+}
+
+
+toDo.call(human);
+
+toDo(human.run.bind(human));
+
+
+// function foo2() {
+//     console.log('fooo-2');
+// }
+
+// setTimeout(foo2, 3000);
+setTimeout(human.run.bind(human), 3000);
+
+// ---------------------------
+
+function sumPlusOne(a, b, c) {
+    return a + b + c;
+}
+
+sumPlusOne(1, 2, 3);
+sumPlusOne(1, 5, 7);
+sumPlusOne(1, 2, 17);
+
+sumPlusOne = sumPlusOne.bind(null, 1);
+
+// ---- pseudo code -------
+// function myBind(context, arg) {
+//     return function(arg) {
+        
+//     }
+// }
+
+// function sumPlusOne(a, b, c) {
+//     return a + b + c;
+// }
+
+// function decorateSumplusOne(c1, c2, c3) {
+//     return sumPlusOne(c2,c1, c3)
+// }
+
+// sumPlusOne(1, 2, 3)
+// sumPlusOne() 
+
+// sumPlusOne = sumPlusOne.myBind(null, 1)
+// ==>function(1) {
+        
+//     }
+
+// sumPlusOne(2, 3)
+//sumPlusOne(5, 6)
+
+
+//-------------------
