@@ -233,3 +233,125 @@ const template = `
 //   a1
 // )
 document.write(template);
+
+// ------------ Destruction --------
+
+
+const foo1 = {
+  a1: 'aaa',
+  a2: 'bbb',
+  a3: 'ccc',
+  a4: {
+    a5: 'inner'
+  }
+};
+
+
+// const key1 = foo1.key1;
+// const key2 = foo1.key2;
+// const a5 = foo1.a4.a5;
+
+const { 
+  a3:b1, 
+  a1, 
+  a2, 
+  a4 : {
+    a5
+  }
+} = foo1;
+
+console.log(b1, 'b1');
+
+console.log(a5 ,'  a5');
+
+console.log(a1, a2, 'a1, a2, a3');
+
+// --------------- destruction array -----------
+const foo4 = ['value-0','value-1', 'value-2', 'value-3'];
+
+const [ v0, , , v3 ] = foo4;
+
+// console.log(v0, v1, v2, v3, 'v0, v1, v2, v3');
+console.log(v0, v3, 'v0, v3');  
+
+
+
+function sum({ j, o, p}) { // let {j, o, p,} = obj;
+  //  console.log(j, o, p, 'j, o, p');
+  // console.log(item, 'item');
+
+}
+// sum(p, j, o)
+
+let obj3 = {
+  p: 2,
+  j: 3,
+  o: 1,
+};
+
+
+
+sum({
+  p: 2,
+  j: 3,
+  o: 1,
+});
+
+
+let o = 1;
+let p = 2;
+let j = 3;
+let valera = 'Pety';
+
+const obj6 =  { o, p, j, valera };
+
+console.log(obj6, 'obj6');
+
+
+// ------- rest, spread ---
+
+
+// function mul(a, ...foo) {
+//   // console.log(arguments, 'argumenta');
+//   console.log(foo, 'foo');
+//   console.log(a, 'a');
+// }
+
+// mul(1, 2, 3, 5)
+
+
+function mul(a1, a2, a3) {
+  // console.log(arguments, 'argumenta');
+  // console.log(foo, 'foo');
+  // console.log(a, 'a');
+
+  console.log(a1, a2, a3);
+}
+
+const array = [1, 2, 3];
+
+// mul(...array);
+// mul.apply(null, array);
+
+
+
+// const u = {
+//   a1: 2,
+//   a2: 3
+// };
+
+// const u1 = {
+//   ...u,
+//   a2: 'valera'
+// };
+
+let u = {
+  a1: 2,
+  a2: 3
+};
+
+// u.a1 = 4;
+u = {
+  ...u,
+  a2: 'valera'
+};
