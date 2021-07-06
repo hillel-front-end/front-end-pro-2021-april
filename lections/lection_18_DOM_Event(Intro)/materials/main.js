@@ -32,7 +32,7 @@
 //   };
 // }
 
-const box = document.querySelector(".box");
+// const box = document.querySelector(".box");
 
 // box.onclick = function () {
 //   console.log("click");
@@ -104,6 +104,58 @@ function handler(event) {
 // box.addEventListener("mouseenter", handler);
 // box.addEventListener("contextmenu", handler);
 
-// document.addEventListener("mousemove", function () {
+// function move(event) {
 //   console.log("event", event.clientY);
+
+//   //   box.style.left = `${event.clientX}px`;
+//   //   box.style.top = `${event.clientY}px`;
+// }
+
+// document.addEventListener("mousemove", move);
+
+// box.addEventListener("click", function () {
+//   document.removeEventListener("mousemove", move);
 // });
+
+// ---- Practice --
+
+const box = document.querySelector(".box");
+
+let state = {
+  shiftX: 0,
+  shiftY: 0,
+};
+
+const draggable = {
+  onDrag({ offsetX, offsetY }) {
+    state = {
+      shiftX: offsetX,
+      shiftY: offsetY,
+    };
+
+    document.addEventListener("mousemove", draggable.onMove);
+
+    console.log(state, "state");
+  },
+
+  onDrop() {
+    document.removeEventListener("mousemove", draggable.onMove);
+  },
+
+  onMove(event) {
+    box.style.left = `${event.clientX}px`;
+    box.style.top = `${event.clientY}px`;
+
+    setTimeout(() => {
+      box.style.top = `${event.clientY - state.shiftY}px`;
+      
+      setTimeout(() => {
+        box.style.left = `${event.clientX - state.shiftX}px`;
+      }, 1000);
+
+    }, 1000);
+  },
+};
+
+box.addEventListener("mousedown", draggable.onDrag);
+box.addEventListener("mouseup", draggable.onDrop);
