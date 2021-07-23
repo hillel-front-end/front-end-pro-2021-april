@@ -36,11 +36,31 @@ app.get("/foo", (req, res) => {
 });
 
 app.get("/users", (request, response) => {
+  const query = request.query;
+
   fs.readFile("./models/users.json", "utf-8", function (error, data) {
     // console.log(data, "data");
-    response.send(data);
+    let users = JSON.parse(data);
+
+    if (query.minAge && query.maxAge) {
+      const {minAge, maxAge} = query;
+      users = users.filter(user => user.age >= minAge && user.age <= maxAge);
+    }
+
+    response.json(users);
   });
 });
+
+//http://localhost:6060/users/valera
+////http://localhost:6060/users/alex/11
+app.get("/users/:name/:id", function (request, response) {
+  console.log(request.params);
+
+  response.send('ok')
+})
+
+
+https://lun.ua/uk/?radius=110&min_full_price=925452&max_full_price=16019520
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
