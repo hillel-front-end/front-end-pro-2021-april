@@ -70,7 +70,6 @@ app.listen(port, function () {
  Если бы было '/user/:foo', то req.params.foo == 123
 */
 app.get("/user/:id", function (req, res) {});
-
-
+// app.post("/user/:id", function (req, res) {});
 
 
