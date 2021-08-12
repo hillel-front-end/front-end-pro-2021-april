@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <style>
+      .error {
+        color: red;
+      }
+
+      .success {
+        color: greenyellow;
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{ title + 'students' }} {{ getTitle() }}
+      <br />
+
+      Married: {{isMarried ? 'yes' : 'no'}}
+      <hr />
+      <h2>Attr data binding</h2>
+
+      <button v-bind:disabled="isDissable">{{login}}</button>
+      <a :href="link">{{link.slice(5)}}</a>
+
+      <hr />
+      <h2>Two way data-binding</h2>
+      <input type="text" v-model="login" />
+      <button :disabled="login.length === 0">send</button>
+      {{login}}
+      <hr />
+
+      <h2>V-if</h2>
+
+      <div v-if="login.length >= 5">Hello {{login}}</div>
+      <div v-else>Hello Anonim</div>
+      <div v-show="login.length >= 5">Show</div>
+
+      <hr />
+
+      <h2>v-for</h2>
+
+      <ul class="products-list">
+        <li v-for="product in products">{{product}}</li>
+      </ul>
+
+      <ul class="products-list">
+        <li v-for="product in products2">{{product.title}}</li>
+      </ul>
+      <hr />
+      <h2>Events</h2>
+      <input type="text" v-model="productName" />
+      <button @click="onClick">click</button>
+
+      <hr />
+      <h2>Styles</h2>
+      <input type="text" v-model="login" />
+      <span :class="login.length == 0 ? 'error': 'success'">Empty field - login</span>
+      <span :style="inlineSyles">Empty field - login</span>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

@@ -1,23 +1,22 @@
-function ajax({ url, method, data, success, error = () => {} }) {
+function sendAjax({ url, method, data }) {
+  return new Promise((resolve, reject) => {
     const xhttp = new XMLHttpRequest();
-  
+
     xhttp.onload = () => {
       const response =
         typeof xhttp.response === "string"
           ? JSON.parse(xhttp.response)
           : xhttp.response;
-  
-      success(response, xhttp.status);
+
+      resolve(response, xhttp.status);
     };
-  
+
     xhttp.onerror = () => {
-      console.log('show error meessage');
-    }
-  
-  
+      reject({ message: "xhttp.error" });
+    };
+
     xhttp.open(method, url);
-  
-    method.toLowerCase() === "post"
-      ? xhttp.send(data)
-      : xhttp.send();
+
+    method.toLowerCase() === "post" ? xhttp.send(data) : xhttp.send();
+  });
 }
